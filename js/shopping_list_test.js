@@ -15,25 +15,24 @@ describe('everything', function () {
   
   // ShoppingListItem
   describe('ShoppingListItem', function () {
-    it('should be a function', function () {
-      expect(ShoppingListItem).to.be.a('function');
-    });
-    
-    it('should have a name', function () {
-      shoppingListItem.name.should.equal(param1);
-    });
-    
-    it('should have a description', function () {
-      shoppingListItem.description.should.equal(param2);
-    });
+    describe('constructor', function () {
+      it('should have a name', function () {
+        shoppingListItem.name.should.equal(param1);
+      });
+      
+      it('should have a description', function () {
+        shoppingListItem.description.should.equal(param2);
+      });
+  
+      it('parameters should be a string', function (){
+        expect(param1).to.be.a('string');
+        expect(param2).to.be.a('string');
+      })
 
-    it('parameters should be a string', function (){
-      expect(param1).to.be.a('string');
-      expect(param2).to.be.a('string');
     })
 
     it.skip('should only have two parameters', function(){
-      
+    
     })
     
     it('is_done should be false', function () {
@@ -42,6 +41,7 @@ describe('everything', function () {
     
   }); //closing bracket for ShoppingListItem
   
+  // Check method
   describe('.check', function (){
     it('should be a function', function (){
       expect(shoppingListItem.check).to.be.a('function');
@@ -54,6 +54,7 @@ describe('everything', function () {
     
   })// closing bracket for check
 
+  // Uncheck method
   describe('.uncheck', function () {
     it('should be a function', function () {
       expect(shoppingListItem.uncheck).to.be.a('function');
@@ -65,21 +66,19 @@ describe('everything', function () {
     })
   }); //closing for uncheck
 
+  // Render method
   describe('.render', function(){
+   
     it('should be a function', function(){
       expect(shoppingListItem.render).to.be.a('function');
     });
 
-    it('should create an html formatted string', function(){
-      // document.createElement
+    it('should create a string', function(){
+      expect(shoppingListItem.render()).to.be.a('string');
     });
-
+    
     it('string content should be wrapped in li tags', function(){
-
-    });
-
-    it('should return the html element', function(){
-
+      expect(shoppingListItem.render()).to.equal(`$<li>`);
     });
   }) // closing for render
 }); //closing for 'everything'

@@ -14,4 +14,8 @@ class ShoppingListItem {
   uncheck() {
     this.is_done = false;
   }
+
+  render() {
+    return `$<li>`;
+  }
 }; //shoppinglist item closing
