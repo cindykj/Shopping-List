@@ -7,6 +7,8 @@ describe('everything', function () {
   let shoppingListItem;
   let param1 = 'potato';
   let param2 = 'starchy';
+  let shoppingList;
+  let array = [];
   
 
   beforeEach(function () {
@@ -81,4 +83,35 @@ describe('everything', function () {
       expect(shoppingListItem.render()).to.equal(`$<li>`);
     });
   }) // closing for render
-}); //closing for 'everything'
+
+// START SHOPPING LIST TESTS
+
+  describe('ShoppingList', function () {
+    describe('constructor', function () {
+      it('should have an items property', function () {
+        shoppingList.items.should.equal(array);
+      });
+
+      it('items should be an array', function () {
+        expect(shoppingList.items).to.be.an('Array');
+      })
+
+      it('array should be empty', function(){
+        expect(shoppingList.items).to.be.empty;
+      })
+    }); // closes constructor
+
+    describe(`addItem`, function (){
+      it('should have a method named add item', function(){
+        shoppingList.should.haveOwnProperty(items);
+      })
+
+      it('should have a single argument ShoppingListItem', function(){
+        expect(shoppingList.addItem).args.length.to.equal(1);
+        expect(shoppingList.addItem).args.to.be.a('ShoppingListItem');
+      });
+    }) // closes add item
+
+
+  }) // closes shopping list
+}) // closes everything
