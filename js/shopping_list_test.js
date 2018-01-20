@@ -44,4 +44,16 @@ describe('everything', function () {
     })
     
   })// closing bracket for check
+
+  describe('.uncheck', function () {
+    it('should be a function', function () {
+      expect(shoppingListItem.uncheck).to.be.a('function');
+    });
+
+    it('should set done property to false', function() {
+      shoppingListItem.uncheck();
+      shoppingListItem.is_done.should.equal(false);
+    })
+  }); //closing for uncheck
+
 }); //closing for 'everything'
