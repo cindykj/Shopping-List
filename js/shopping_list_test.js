@@ -10,7 +10,7 @@ describe('everything', function () {
   
 
   beforeEach(function () {
-    shoppingListItem = new ShoppingListItem('param1', 'param2');
+    shoppingListItem = new ShoppingListItem(param1, param2);
   })
   
   // ShoppingListItem
@@ -20,14 +20,23 @@ describe('everything', function () {
     });
     
     it('should have a name', function () {
-      shoppingListItem.name.should.equal('param1');
+      shoppingListItem.name.should.equal(param1);
     });
     
     it('should have a description', function () {
-      shoppingListItem.description.should.equal('param2');
+      shoppingListItem.description.should.equal(param2);
     });
+
+    it('parameters should be a string', function (){
+      expect(param1).to.be.a('string');
+      expect(param2).to.be.a('string');
+    })
+
+    it.skip('should only have two parameters', function(){
+      
+    })
     
-    it('should be done', function () {
+    it('is_done should be false', function () {
       shoppingListItem.is_done.should.equal(false);
     });
     
@@ -56,4 +65,21 @@ describe('everything', function () {
     })
   }); //closing for uncheck
 
+  describe('.render', function(){
+    it('should be a function', function(){
+      expect(shoppingListItem.render).to.be.a('function');
+    });
+
+    it('should create an html formatted string', function(){
+      // document.createElement
+    });
+
+    it('string content should be wrapped in li tags', function(){
+
+    });
+
+    it('should return the html element', function(){
+
+    });
+  }) // closing for render
 }); //closing for 'everything'
