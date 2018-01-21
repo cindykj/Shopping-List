@@ -13,4 +13,9 @@ class ShoppingList {
     }
   
   };
+
+  removeIem(itemToRemove) {
+  let itemIndex = this.items.indexOf(itemToRemove);
+  this.items.splice(itemIndex, 1);
+  }
 }

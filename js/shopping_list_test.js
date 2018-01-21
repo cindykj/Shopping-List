@@ -5,32 +5,33 @@ let should = chai.should();
 // Before and after??
 describe('everything', function () {
   // this creates an instance
-  let param1 = 'potato';
-  let param2 = 'starchy';
-  let potato = new ShoppingListItem(param1, param2);
+  let potato = new ShoppingListItem('potato', 'starchy');
   let array = [];
+  let apple = new ShoppingListItem('apple', 'red');
+  let banana = new ShoppingListItem('banana', 'yellow');
+  let kiwi = new ShoppingListItem('kiwi', 'fuzzy');
+
 
 
   // ShoppingListItem
   describe('ShoppingListItem', function () {
     describe('constructor', function () {
       it('should have a name', function () {
-        potato.name.should.equal(param1);
+        potato.name.should.equal('potato');
       });
 
       it('should have a description', function () {
-        potato.description.should.equal(param2);
+        potato.description.should.equal('starchy');
       });
 
       it('parameters should be a string', function () {
-        expect(param1).to.be.a('string');
-        expect(param2).to.be.a('string');
+        expect('potato').to.be.a('string');
+        expect('starchy').to.be.a('string');
       })
 
     }) //closing constructor
 
-    it.skip('should only have two parameters', function () {
-    })
+    it.skip('should only have two parameters', function () {})
 
     it('is_done should be false', function () {
       potato.is_done.should.equal(false); // potato begins as false
@@ -110,36 +111,61 @@ describe('everything', function () {
 
       it('should be a function', function () {
         expect(list.addItem).to.be.a('function');
-      })
+      });
 
-      // it('should have a single argument', function () {
-      //   expect(list.addItem).arguments.length.to.be(1)
-      
-      // });
       it('should invoke addItem by passing ShoppingListItem into items', function () {
-        let apple = new ShoppingListItem ('apple', 'red');
-        let banana = new ShoppingListItem ('banana', 'yellow');
-        let kiwi = new ShoppingListItem ('kiwi', 'fuzzy');
-
+       
         list.addItem(apple);
         list.addItem(banana);
         list.addItem(kiwi);
 
-        expect(list.items).to.contain(apple, banana, kiwi);
-      })
+        expect(list.items).to.contain(apple);
+        expect(list.items).to.contain(banana);
+        expect(list.items).to.contain(kiwi);
+      });
 
       it('should throw an error if it is not a ShoppingListItem', function () {
         expect(list.addItem.bind(list, 'poop')).to.throw();
-      })
+      });
 
       // it('should add the item to the shopping list', function () {
       //   list.addItem(potato);
       //   list.items.should.include(potato);
       // })
+    }); // closes add item
+
+    describe('removeItem', function () {
 
 
-    }) // closes add item
+      it('should be a function', function () {
+        expect(list.removeItem).to.be.a('function');
+      });
 
+      // items currently has three things in array
+      it('should remove an item from the shopping list', function () {
+        list.removeItem(apple);
+
+        list.removeItem(apple).should.equal(true);
+
+        list.items.should.not.contain(apple);
+        list.items.should.contain(banana);
+        list.items.should.contain(kiwi);
+      });
+
+      console.log(list.items);
+      // should only have banana and kiwi in the items
+      it('should remove the last item in the list if no itemToRemove is declared', function(){
+        list.removeItem(kiwi);
+        
+        list.removeItem(kiwi).should.equal(true);
+        list.items.should.not.contain(kiwi);
+        list.items.should.contain(banana);
+      });
+
+      it('should throw an error if its not in the items list', function (){
+        expect(list.removeItem.bind(list.items, 'poop')).to.throw();
+      })
+    })
 
 
   }) // closes everythingshoppinglist
