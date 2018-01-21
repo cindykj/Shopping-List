@@ -119,23 +119,22 @@ describe('everything', function () {
         list.addItem(banana);
         list.addItem(kiwi);
 
+
         expect(list.items).to.contain(apple);
         expect(list.items).to.contain(banana);
         expect(list.items).to.contain(kiwi);
+
+
+
       });
 
       it('should throw an error if it is not a ShoppingListItem', function () {
         expect(list.addItem.bind(list, 'poop')).to.throw();
       });
 
-      // it('should add the item to the shopping list', function () {
-      //   list.addItem(potato);
-      //   list.items.should.include(potato);
-      // })
     }); // closes add item
 
     describe('removeItem', function () {
-
 
       it('should be a function', function () {
         expect(list.removeItem).to.be.a('function');
@@ -143,20 +142,19 @@ describe('everything', function () {
 
       // items currently has three things in array
       it('should remove an item from the shopping list', function () {
-        list.removeItem(apple);
 
         list.removeItem(apple).should.equal(true);
-
         list.items.should.not.contain(apple);
         list.items.should.contain(banana);
+        // list.items.should.contain(potato);
         list.items.should.contain(kiwi);
+        
       });
 
-      console.log(list.items);
+      // console.log(list.items);
       // should only have banana and kiwi in the items
       it('should remove the last item in the list if no itemToRemove is declared', function(){
-        list.removeItem(kiwi);
-        
+
         list.removeItem(kiwi).should.equal(true);
         list.items.should.not.contain(kiwi);
         list.items.should.contain(banana);
