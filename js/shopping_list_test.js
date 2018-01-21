@@ -113,19 +113,15 @@ describe('everything', function () {
         expect(list.addItem).to.be.a('function');
       });
 
-      it('should invoke addItem by passing ShoppingListItem into items', function () {
-       
+      it('should invoke addItem by passing ShoppingListItem into items', function () {       
         list.addItem(apple);
+        list.addItem(potato);
         list.addItem(banana);
         list.addItem(kiwi);
-
-
         expect(list.items).to.contain(apple);
+        expect(list.items).to.contain(potato);
         expect(list.items).to.contain(banana);
         expect(list.items).to.contain(kiwi);
-
-
-
       });
 
       it('should throw an error if it is not a ShoppingListItem', function () {
@@ -145,24 +141,46 @@ describe('everything', function () {
 
         list.removeItem(apple).should.equal(true);
         list.items.should.not.contain(apple);
+        list.items.should.contain(potato);
         list.items.should.contain(banana);
-        // list.items.should.contain(potato);
         list.items.should.contain(kiwi);
         
       });
 
       // console.log(list.items);
-      // should only have banana and kiwi in the items
+      // should only have potato, banana, kiwi, and  in the items
       it('should remove the last item in the list if no itemToRemove is declared', function(){
 
         list.removeItem(kiwi).should.equal(true);
         list.items.should.not.contain(kiwi);
+        list.items.should.contain(potato);
         list.items.should.contain(banana);
+
       });
 
       it('should throw an error if its not in the items list', function (){
         expect(list.removeItem.bind(list.items, 'poop')).to.throw();
       })
+    })
+      //should have potato and banana in items
+    describe('render', function () {
+      it('should be a function', function () {
+        expect(list.render).to.be.a('function');
+      });
+
+      it('should return something', function () {
+        expect(list.render()).to.not.be.empty
+      })
+  
+      it('should return a string', function () {
+        expect(list.render()).to.be.a('string');
+      });
+
+      it('string content should return an element that concats shoppinglistitem.render() with ul tags', function () {
+        let newTest = '<ul><li class="completed_false"><span>potato</span> <span>starchy</span></li><li class="completed_false"><span>banana</span> <span>yellow</span></li></ul>';
+        expect(list.render()).to.equal(newTest);
+      });
+
     })
 
 
