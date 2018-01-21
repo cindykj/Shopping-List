@@ -5,10 +5,9 @@ let should = chai.should();
 // Before and after??
 describe('everything', function () {
   // this creates an instance
-  let potato = new ShoppingListItem(param1, param2);
   let param1 = 'potato';
   let param2 = 'starchy';
-  let list = new ShoppingList();
+  let potato = new ShoppingListItem(param1, param2);
   let array = [];
 
 
@@ -28,10 +27,9 @@ describe('everything', function () {
         expect(param2).to.be.a('string');
       })
 
-    })
+    }) //closing constructor
 
     it.skip('should only have two parameters', function () {
-
     })
 
     it('is_done should be false', function () {
@@ -90,43 +88,54 @@ describe('everything', function () {
   // START SHOPPING LIST TESTS
 
   describe('ShoppingList', function () {
+    let list = new ShoppingList();
+
+
     describe('constructor', function () {
       it('should have an items property', function () {
-        shoppingList.items.should.equal(array);
+        // list.items.should.equal(array);
+        expect(list).to.have.ownPropertyDescriptor('items');
       });
 
       it('items should be an array', function () {
-        expect(shoppingList.items).to.be.an('Array');
+        expect(list.items).to.be.an('Array');
       })
 
       it('array should be empty', function () {
-        expect(shoppingList.items).to.be.empty;
+        expect(list.items).to.be.empty;
       })
     }); // closes constructor
 
     describe(`addItem`, function () {
 
       it('should be a function', function () {
-        expect(shoppingList.addItem).to.be.a('function');
+        expect(list.addItem).to.be.a('function');
       })
 
-      it('should have a single argument ShoppingListItem', function () {
-        shoppingList.addItem(potato);
-      });
+      // it('should have a single argument', function () {
+      //   expect(list.addItem).arguments.length.to.be(1)
+      
+      // });
+      it('should invoke addItem by passing ShoppingListItem into items', function () {
+        let apple = new ShoppingListItem ('apple', 'red');
+        let banana = new ShoppingListItem ('banana', 'yellow');
+        let kiwi = new ShoppingListItem ('kiwi', 'fuzzy');
 
-      it('should only accept an argument that is a ShoppingListItem', function () {
-        expect(potato instanceof ShoppingListItem).to.equal(true);
-        // expect(list.addItem.bind(list, potato)).to.not.throw();
+        list.addItem(apple);
+        list.addItem(banana);
+        list.addItem(kiwi);
+
+        expect(list.items).to.contain(apple, banana, kiwi);
       })
 
       it('should throw an error if it is not a ShoppingListItem', function () {
         expect(list.addItem.bind(list, 'poop')).to.throw();
       })
 
-      it('should add the item to the shopping list', function () {
-        list.addItem(potato);
-        list.items.should.include(potato);
-      })
+      // it('should add the item to the shopping list', function () {
+      //   list.addItem(potato);
+      //   list.items.should.include(potato);
+      // })
 
 
     }) // closes add item
