@@ -4,58 +4,54 @@ let should = chai.should();
 
 // Before and after??
 describe('everything', function () {
+  // this creates an instance
+  let potato = new ShoppingListItem(param1, param2);
+  let param1 = 'potato';
+  let param2 = 'starchy';
+  let list = new ShoppingList();
+  let array = [];
 
-  describe('everythingShoppingListItem', function(){
-    let potato;
-    let param1 = 'potato';
-    let param2 = 'starchy';
-    
 
-  beforeEach(function () {
-    // this creates an instance
-    potato = new ShoppingListItem(param1, param2);
-  })
-  
   // ShoppingListItem
   describe('ShoppingListItem', function () {
     describe('constructor', function () {
       it('should have a name', function () {
         potato.name.should.equal(param1);
       });
-      
+
       it('should have a description', function () {
         potato.description.should.equal(param2);
       });
-  
-      it('parameters should be a string', function (){
+
+      it('parameters should be a string', function () {
         expect(param1).to.be.a('string');
         expect(param2).to.be.a('string');
       })
 
     })
 
-    it.skip('should only have two parameters', function(){
-    
+    it.skip('should only have two parameters', function () {
+
     })
-    
+
     it('is_done should be false', function () {
       potato.is_done.should.equal(false); // potato begins as false
     });
-    
+
   }); //closing bracket for ShoppingListItem
-  
+
   // Check method
-  describe('.check', function (){
-    it('should be a function', function (){
+  describe('.check', function () {
+    it('should be a function', function () {
       expect(potato.check).to.be.a('function');
     });
-  
-    it('should set done property to true', function (){
-      potato.check(); 
+
+    it('should set done property to true', function () {
+      potato.check();
       potato.is_done.should.equal(true); // potato is changed to true
     })
-    
-  })// closing bracket for check
+
+  }) // closing bracket for check
 
   // Uncheck method
   describe('.uncheck', function () {
@@ -63,38 +59,34 @@ describe('everything', function () {
       expect(potato.uncheck).to.be.a('function');
     });
 
-    it('should set done property to false', function() {
+    it('should set done property to false', function () {
       potato.uncheck();
       potato.is_done.should.equal(false); // potato is changed back to false
     })
   }); //closing for uncheck
 
   // Render method
-  describe('.render', function(){
-   
-    it('should be a function', function(){
+  describe('.render', function () {
+
+    it('should be a function', function () {
       expect(potato.render).to.be.a('function');
     });
 
-    it('should return something', function (){
+    it('should return something', function () {
       expect(potato.render()).to.not.be.empty
     })
 
-    it('should return a string', function(){
+    it('should return a string', function () {
       expect(potato.render()).to.be.a('string');
     });
-    
-    it('string content should return an element that includes is_done, name, description', function(){
+
+    it('string content should return an element that includes is_done, name, description', function () {
       let test = '<li class="completed_false"><span>potato</span> <span>starchy</span></li>'
       expect(potato.render()).to.equal(test);
     });
   }) // closing for render
 
-}) // end of everythingshopinglistitem
 
-describe('everythingShoppingList', function(){
-  let shoppingList;
-  let array = [];
   // START SHOPPING LIST TESTS
 
   describe('ShoppingList', function () {
@@ -102,28 +94,44 @@ describe('everythingShoppingList', function(){
       it('should have an items property', function () {
         shoppingList.items.should.equal(array);
       });
-      
+
       it('items should be an array', function () {
         expect(shoppingList.items).to.be.an('Array');
       })
-      
-      it('array should be empty', function(){
+
+      it('array should be empty', function () {
         expect(shoppingList.items).to.be.empty;
       })
     }); // closes constructor
-    
-    describe(`addItem`, function (){
-      it('should have a method named add item', function(){
-        shoppingList.should.haveOwnProperty(items);
+
+    describe(`addItem`, function () {
+
+      it('should be a function', function () {
+        expect(shoppingList.addItem).to.be.a('function');
       })
-      
-      it('should have a single argument ShoppingListItem', function(){
-        expect(shoppingList.addItem).args.length.to.equal(1);
-        expect(shoppingList.addItem).args.to.be.a('ShoppingListItem');
+
+      it('should have a single argument ShoppingListItem', function () {
+        shoppingList.addItem(potato);
       });
+
+      it('should only accept an argument that is a ShoppingListItem', function () {
+        expect(potato instanceof ShoppingListItem).to.equal(true);
+        // expect(list.addItem.bind(list, potato)).to.not.throw();
+      })
+
+      it('should throw an error if it is not a ShoppingListItem', function () {
+        expect(list.addItem.bind(list, 'poop')).to.throw();
+      })
+
+      it('should add the item to the shopping list', function () {
+        list.addItem(potato);
+        list.items.should.include(potato);
+      })
+
+
     }) // closes add item
-    
-    
-  }) // closes shopping list
-})// closes everythingshoppinglist
+
+
+
+  }) // closes everythingshoppinglist
 }) // closes everything
